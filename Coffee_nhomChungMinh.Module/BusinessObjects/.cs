@@ -1,4 +1,5 @@
-﻿using DevExpress.Data.Filtering;
+﻿using Coffee_nhomChungMinh.Module.BusinessObjects;
+using DevExpress.Data.Filtering;
 using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.DC;
 using DevExpress.ExpressApp.Model;
@@ -12,19 +13,19 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
-namespace Coffee_nhomChungMinh.Module.BusinessObjects
+namespace DXApplication1.Module.BusinessObjects
 {
     [DefaultClassOptions]
     //[ImageName("BO_Contact")]
-    //[DefaultProperty("DisplayMemberNameForLookupEditorsOfThisType")]
-    //[DefaultListViewOptions(MasterDetailMode.ListViewOnly, false, NewItemRowPosition.None)]
+    [DefaultProperty("Soban")]
+    [DefaultListViewOptions(MasterDetailMode.ListViewOnly, true, NewItemRowPosition.Top)]
     //[Persistent("DatabaseTableName")]
     // Specify more UI options using a declarative approach (https://documentation.devexpress.com/#eXpressAppFramework/CustomDocument112701).
-    public class HoadonCT : BaseObject
+    public class Hoadon : BaseObject
     { // Inherit from a different class to provide a custom primary key, concurrency and deletion behavior, etc. (https://documentation.devexpress.com/eXpressAppFramework/CustomDocument113146.aspx).
         // Use CodeRush to create XPO classes and properties with a few keystrokes.
         // https://docs.devexpress.com/CodeRushForRoslyn/118557
-        public HoadonCT(Session session)
+        public Hoadon(Session session)
             : base(session)
         {
         }
@@ -34,43 +35,42 @@ namespace Coffee_nhomChungMinh.Module.BusinessObjects
             // Place your initialization code here (https://documentation.devexpress.com/eXpressAppFramework/CustomDocument112834.aspx).
         }
 
-        private Hoadon _Hoadon;
-        [Association]
-        public Hoadon Hoadon
+        private int _Soban;
+        [XafDisplayName("Số bàn")]
+        public int Soban
         {
-            get { return _Hoadon; }
-            set { SetPropertyValue<Hoadon>(nameof(Hoadon), ref _Hoadon, value); }
+            get { return _Soban; }
+            set { SetPropertyValue<int>(nameof(Soban), ref _Soban, value); }
         }
 
 
-        private Sanpham _Sanpham;
-        [Association]
-        public Sanpham Sanpham
+        private DateTime _Ngay;
+        [XafDisplayName("Ngày")]
+        public DateTime Ngay
         {
-            get { return _Sanpham; }
-            set { SetPropertyValue<Sanpham>(nameof(Sanpham), ref _Sanpham, value); }
+            get { return _Ngay; }
+            set { SetPropertyValue<DateTime>(nameof(Ngay), ref _Ngay, value); }
         }
 
-
-
-
-        private double _Soluong;
-        [XafDisplayName("Số lượng")]
-        public double Soluong
+        [DevExpress.Xpo.Aggregated, Association]
+        public XPCollection<HoadonCT> HoadonCTs
         {
-            get { return _Soluong; }
-            set { SetPropertyValue<double>(nameof(Soluong), ref _Soluong, value); }
+            get { return GetCollection<HoadonCT>(nameof(HoadonCTs)); }
         }
 
+        [XafDisplayName("Tổng tiền")]
+        [ModelDefault("DisplayFormat", "{0:### ### ###}")]
 
-        private decimal _Dongia;
-        [XafDisplayName("Đơn giá")]
-        public decimal Dongia
+        public decimal Tongtien
         {
-            get { return _Dongia; }
-            set { SetPropertyValue<decimal>(nameof(Dongia), ref _Dongia, value); }
+            get
+            {
+                decimal tien = 0;
+                foreach (HoadonCT item in HoadonCTs)
+                    tien += item.Thanhtien;
+                return tien;
+            }
         }
-
 
     }
 }

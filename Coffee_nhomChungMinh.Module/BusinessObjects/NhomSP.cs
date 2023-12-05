@@ -12,13 +12,12 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
-namespace DXApplication1.Module.BusinessObjects
+namespace Coffee_nhomChungMinh.Module.BusinessObjects
 {
     [DefaultClassOptions]
     //[ImageName("BO_Contact")]
-    [System.ComponentModel.DisplayName("Nhóm thực đơn")]
-    [DefaultProperty("Tennhom")]
-    [DefaultListViewOptions(MasterDetailMode.ListViewOnly, true, NewItemRowPosition.Top)]
+    //[DefaultProperty("DisplayMemberNameForLookupEditorsOfThisType")]
+    //[DefaultListViewOptions(MasterDetailMode.ListViewOnly, false, NewItemRowPosition.None)]
     //[Persistent("DatabaseTableName")]
     // Specify more UI options using a declarative approach (https://documentation.devexpress.com/#eXpressAppFramework/CustomDocument112701).
     public class NhomSP : BaseObject
@@ -35,20 +34,30 @@ namespace DXApplication1.Module.BusinessObjects
             // Place your initialization code here (https://documentation.devexpress.com/eXpressAppFramework/CustomDocument112834.aspx).
         }
 
+
         private string _Tennhom;
-        [XafDisplayName("Tên nhóm"), Size(30)]
+        [XafDisplayName("Tên nhóm")]
         public string Tennhom
         {
             get { return _Tennhom; }
             set { SetPropertyValue<string>(nameof(Tennhom), ref _Tennhom, value); }
         }
 
+
         [DevExpress.Xpo.Aggregated, Association]
-        [XafDisplayName("Thực đơn trong nhóm")]
         public XPCollection<Sanpham> Sanphams
         {
             get { return GetCollection<Sanpham>(nameof(Sanphams)); }
         }
+
+
+
+
+
+
+
+
+
 
 
     }

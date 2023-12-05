@@ -20,11 +20,11 @@ namespace Coffee_nhomChungMinh.Module.BusinessObjects
     //[DefaultListViewOptions(MasterDetailMode.ListViewOnly, false, NewItemRowPosition.None)]
     //[Persistent("DatabaseTableName")]
     // Specify more UI options using a declarative approach (https://documentation.devexpress.com/#eXpressAppFramework/CustomDocument112701).
-    public class HoadonCT : BaseObject
+    public class Chamcong : BaseObject
     { // Inherit from a different class to provide a custom primary key, concurrency and deletion behavior, etc. (https://documentation.devexpress.com/eXpressAppFramework/CustomDocument113146.aspx).
         // Use CodeRush to create XPO classes and properties with a few keystrokes.
         // https://docs.devexpress.com/CodeRushForRoslyn/118557
-        public HoadonCT(Session session)
+        public Chamcong(Session session)
             : base(session)
         {
         }
@@ -34,41 +34,30 @@ namespace Coffee_nhomChungMinh.Module.BusinessObjects
             // Place your initialization code here (https://documentation.devexpress.com/eXpressAppFramework/CustomDocument112834.aspx).
         }
 
-        private Hoadon _Hoadon;
+        private Nhanvien _Nhanvien;
         [Association]
-        public Hoadon Hoadon
+        public Nhanvien Nhanvien
         {
-            get { return _Hoadon; }
-            set { SetPropertyValue<Hoadon>(nameof(Hoadon), ref _Hoadon, value); }
+            get { return _Nhanvien; }
+            set { SetPropertyValue<Nhanvien>(nameof(Nhanvien), ref _Nhanvien, value); }
         }
 
 
-        private Sanpham _Sanpham;
-        [Association]
-        public Sanpham Sanpham
+        private DateTime _Giovao;
+        [XafDisplayName("Giờ vào")]
+        public DateTime Giovao
         {
-            get { return _Sanpham; }
-            set { SetPropertyValue<Sanpham>(nameof(Sanpham), ref _Sanpham, value); }
+            get { return _Giovao; }
+            set { SetPropertyValue<DateTime>(nameof(Giovao), ref _Giovao, value); }
         }
 
 
-
-
-        private double _Soluong;
-        [XafDisplayName("Số lượng")]
-        public double Soluong
+        private DateTime _Giora;
+        [XafDisplayName("Giờ ra")]
+        public DateTime Giora
         {
-            get { return _Soluong; }
-            set { SetPropertyValue<double>(nameof(Soluong), ref _Soluong, value); }
-        }
-
-
-        private decimal _Dongia;
-        [XafDisplayName("Đơn giá")]
-        public decimal Dongia
-        {
-            get { return _Dongia; }
-            set { SetPropertyValue<decimal>(nameof(Dongia), ref _Dongia, value); }
+            get { return _Giora; }
+            set { SetPropertyValue<DateTime>(nameof(Giora), ref _Giora, value); }
         }
 
 

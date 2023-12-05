@@ -1,5 +1,4 @@
-﻿using Coffee_nhomChungMinh.Module.BusinessObjects;
-using DevExpress.Data.Filtering;
+﻿using DevExpress.Data.Filtering;
 using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.DC;
 using DevExpress.ExpressApp.Model;
@@ -11,14 +10,15 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 
-namespace DXApplication1.Module.BusinessObjects
+namespace Coffee_nhomChungMinh.Module.BusinessObjects
 {
     [DefaultClassOptions]
     //[ImageName("BO_Contact")]
-    [DefaultProperty("Soban")]
-    [DefaultListViewOptions(MasterDetailMode.ListViewOnly, true, NewItemRowPosition.Top)]
+    //[DefaultProperty("DisplayMemberNameForLookupEditorsOfThisType")]
+    //[DefaultListViewOptions(MasterDetailMode.ListViewOnly, false, NewItemRowPosition.None)]
     //[Persistent("DatabaseTableName")]
     // Specify more UI options using a declarative approach (https://documentation.devexpress.com/#eXpressAppFramework/CustomDocument112701).
     public class Hoadon : BaseObject
@@ -35,14 +35,6 @@ namespace DXApplication1.Module.BusinessObjects
             // Place your initialization code here (https://documentation.devexpress.com/eXpressAppFramework/CustomDocument112834.aspx).
         }
 
-        private int _Soban;
-        [XafDisplayName("Số bàn")]
-        public int Soban
-        {
-            get { return _Soban; }
-            set { SetPropertyValue<int>(nameof(Soban), ref _Soban, value); }
-        }
-
 
         private DateTime _Ngay;
         [XafDisplayName("Ngày")]
@@ -52,25 +44,37 @@ namespace DXApplication1.Module.BusinessObjects
             set { SetPropertyValue<DateTime>(nameof(Ngay), ref _Ngay, value); }
         }
 
+
+        private int _Soban;
+        [XafDisplayName("Số bàn")]
+        public int Soban
+        {
+            get { return _Soban; }
+            set { SetPropertyValue<int>(nameof(Soban), ref _Soban, value); }
+        }
+
+
+
         [DevExpress.Xpo.Aggregated, Association]
-        public XPCollection<HoadonCT> HoadonCTs
+        public XPCollection<Khachhang> Khachhangs
         {
-            get { return GetCollection<HoadonCT>(nameof(HoadonCTs)); }
+            get { return GetCollection<Khachhang>(nameof(Khachhangs)); }
         }
 
-        [XafDisplayName("Tổng tiền")]
-        [ModelDefault("DisplayFormat", "{0:### ### ###}")]
 
-        public decimal Tongtien
+
+
+
+        [DevExpress.Xpo.Aggregated, Association]
+        public XPCollection<Thungan> Thungans
         {
-            get
-            {
-                decimal tien = 0;
-                foreach (HoadonCT item in HoadonCTs)
-                    tien += item.Thanhtien;
-                return tien;
-            }
+            get { return GetCollection<Thungan>(nameof(Thungans)); }
         }
+
+
+
+
+
 
     }
 }

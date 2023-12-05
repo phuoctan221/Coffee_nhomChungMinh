@@ -20,11 +20,11 @@ namespace Coffee_nhomChungMinh.Module.BusinessObjects
     //[DefaultListViewOptions(MasterDetailMode.ListViewOnly, false, NewItemRowPosition.None)]
     //[Persistent("DatabaseTableName")]
     // Specify more UI options using a declarative approach (https://documentation.devexpress.com/#eXpressAppFramework/CustomDocument112701).
-    public class HoadonCT : BaseObject
+    public class PhieunhapCT : BaseObject
     { // Inherit from a different class to provide a custom primary key, concurrency and deletion behavior, etc. (https://documentation.devexpress.com/eXpressAppFramework/CustomDocument113146.aspx).
         // Use CodeRush to create XPO classes and properties with a few keystrokes.
         // https://docs.devexpress.com/CodeRushForRoslyn/118557
-        public HoadonCT(Session session)
+        public PhieunhapCT(Session session)
             : base(session)
         {
         }
@@ -34,13 +34,15 @@ namespace Coffee_nhomChungMinh.Module.BusinessObjects
             // Place your initialization code here (https://documentation.devexpress.com/eXpressAppFramework/CustomDocument112834.aspx).
         }
 
-        private Hoadon _Hoadon;
+
+        private Phieunhap _Phieunhap;
         [Association]
-        public Hoadon Hoadon
+        public Phieunhap Phieunhap
         {
-            get { return _Hoadon; }
-            set { SetPropertyValue<Hoadon>(nameof(Hoadon), ref _Hoadon, value); }
+            get { return _Phieunhap; }
+            set { SetPropertyValue<Phieunhap>(nameof(Phieunhap), ref _Phieunhap, value); }
         }
+
 
 
         private Sanpham _Sanpham;
@@ -52,10 +54,7 @@ namespace Coffee_nhomChungMinh.Module.BusinessObjects
         }
 
 
-
-
         private double _Soluong;
-        [XafDisplayName("Số lượng")]
         public double Soluong
         {
             get { return _Soluong; }
@@ -64,12 +63,14 @@ namespace Coffee_nhomChungMinh.Module.BusinessObjects
 
 
         private decimal _Dongia;
-        [XafDisplayName("Đơn giá")]
         public decimal Dongia
         {
             get { return _Dongia; }
             set { SetPropertyValue<decimal>(nameof(Dongia), ref _Dongia, value); }
         }
+
+
+
 
 
     }

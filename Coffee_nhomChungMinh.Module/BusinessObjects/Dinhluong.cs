@@ -20,11 +20,11 @@ namespace Coffee_nhomChungMinh.Module.BusinessObjects
     //[DefaultListViewOptions(MasterDetailMode.ListViewOnly, false, NewItemRowPosition.None)]
     //[Persistent("DatabaseTableName")]
     // Specify more UI options using a declarative approach (https://documentation.devexpress.com/#eXpressAppFramework/CustomDocument112701).
-    public class HoadonCT : BaseObject
+    public class Dinhluong : BaseObject
     { // Inherit from a different class to provide a custom primary key, concurrency and deletion behavior, etc. (https://documentation.devexpress.com/eXpressAppFramework/CustomDocument113146.aspx).
         // Use CodeRush to create XPO classes and properties with a few keystrokes.
         // https://docs.devexpress.com/CodeRushForRoslyn/118557
-        public HoadonCT(Session session)
+        public Dinhluong(Session session)
             : base(session)
         {
         }
@@ -34,42 +34,42 @@ namespace Coffee_nhomChungMinh.Module.BusinessObjects
             // Place your initialization code here (https://documentation.devexpress.com/eXpressAppFramework/CustomDocument112834.aspx).
         }
 
-        private Hoadon _Hoadon;
-        [Association]
-        public Hoadon Hoadon
-        {
-            get { return _Hoadon; }
-            set { SetPropertyValue<Hoadon>(nameof(Hoadon), ref _Hoadon, value); }
-        }
 
 
-        private Sanpham _Sanpham;
+        private Sanpham _Hang;
         [Association]
-        public Sanpham Sanpham
+        public Sanpham Hang
         {
-            get { return _Sanpham; }
-            set { SetPropertyValue<Sanpham>(nameof(Sanpham), ref _Sanpham, value); }
+            get { return _Hang; }
+            set { SetPropertyValue<Sanpham>(nameof(Hang), ref _Hang, value); }
         }
 
 
 
 
-        private double _Soluong;
+
+
+        private Thanhphan _phan;
+        [Association]
+        public Thanhphan phan
+        {
+            get { return _phan; }
+            set { SetPropertyValue<Thanhphan>(nameof(phan), ref _phan, value); }
+        }
+
+
+
+
+
+
+        private string _Soluong;
         [XafDisplayName("Số lượng")]
-        public double Soluong
+        public string Soluong
         {
             get { return _Soluong; }
-            set { SetPropertyValue<double>(nameof(Soluong), ref _Soluong, value); }
+            set { SetPropertyValue<string>(nameof(Soluong), ref _Soluong, value); }
         }
 
-
-        private decimal _Dongia;
-        [XafDisplayName("Đơn giá")]
-        public decimal Dongia
-        {
-            get { return _Dongia; }
-            set { SetPropertyValue<decimal>(nameof(Dongia), ref _Dongia, value); }
-        }
 
 
     }

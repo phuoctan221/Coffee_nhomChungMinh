@@ -20,11 +20,11 @@ namespace Coffee_nhomChungMinh.Module.BusinessObjects
     //[DefaultListViewOptions(MasterDetailMode.ListViewOnly, false, NewItemRowPosition.None)]
     //[Persistent("DatabaseTableName")]
     // Specify more UI options using a declarative approach (https://documentation.devexpress.com/#eXpressAppFramework/CustomDocument112701).
-    public class HoadonCT : BaseObject
+    public class Nhanvien : BaseObject
     { // Inherit from a different class to provide a custom primary key, concurrency and deletion behavior, etc. (https://documentation.devexpress.com/eXpressAppFramework/CustomDocument113146.aspx).
         // Use CodeRush to create XPO classes and properties with a few keystrokes.
         // https://docs.devexpress.com/CodeRushForRoslyn/118557
-        public HoadonCT(Session session)
+        public Nhanvien(Session session)
             : base(session)
         {
         }
@@ -34,43 +34,61 @@ namespace Coffee_nhomChungMinh.Module.BusinessObjects
             // Place your initialization code here (https://documentation.devexpress.com/eXpressAppFramework/CustomDocument112834.aspx).
         }
 
-        private Hoadon _Hoadon;
-        [Association]
-        public Hoadon Hoadon
+        private string _Hoten;
+        [XafDisplayName("Họ tên"),Size(30)]
+        public string Hoten
         {
-            get { return _Hoadon; }
-            set { SetPropertyValue<Hoadon>(nameof(Hoadon), ref _Hoadon, value); }
+            get { return _Hoten; }
+            set { SetPropertyValue<string>(nameof(Hoten), ref _Hoten, value); }
         }
 
 
-        private Sanpham _Sanpham;
-        [Association]
-        public Sanpham Sanpham
+        private string _phone;
+        [XafDisplayName("Phone"),Size(30)]
+        public string phone
         {
-            get { return _Sanpham; }
-            set { SetPropertyValue<Sanpham>(nameof(Sanpham), ref _Sanpham, value); }
+            get { return _phone; }
+            set { SetPropertyValue<string>(nameof(phone), ref _phone, value); }
+        }
+
+
+        private string _Congviec;
+        [XafDisplayName("Công việc")]
+        public string Congviec
+        {
+            get { return _Congviec; }
+            set { SetPropertyValue<string>(nameof(Congviec), ref _Congviec, value); }
         }
 
 
 
-
-        private double _Soluong;
-        [XafDisplayName("Số lượng")]
-        public double Soluong
+        [DevExpress.Xpo.Aggregated, Association]
+        public XPCollection<Phieuchi> Phieuchis
         {
-            get { return _Soluong; }
-            set { SetPropertyValue<double>(nameof(Soluong), ref _Soluong, value); }
+            get { return GetCollection<Phieuchi>(nameof(Phieuchis)); }
         }
 
 
-        private decimal _Dongia;
-        [XafDisplayName("Đơn giá")]
-        public decimal Dongia
+
+        [DevExpress.Xpo.Aggregated, Association]
+        public XPCollection<Phieuthu> Phieuthus
         {
-            get { return _Dongia; }
-            set { SetPropertyValue<decimal>(nameof(Dongia), ref _Dongia, value); }
+            get { return GetCollection<Phieuthu>(nameof(Phieuthus)); }
         }
 
+
+        [DevExpress.Xpo.Aggregated, Association]
+        public XPCollection<Chamcong> Chamcongs
+        {
+            get { return GetCollection<Chamcong>(nameof(Chamcongs)); }
+        }
+
+
+        [DevExpress.Xpo.Aggregated, Association]
+        public XPCollection<Phieuxuat> Phieuxuats
+        {
+            get { return GetCollection<Phieuxuat>(nameof(Phieuxuats)); }
+        }
 
     }
 }
